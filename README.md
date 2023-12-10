@@ -24,7 +24,7 @@ still incorporating some of the necessary skills for the nuts and bolts of game 
 Functionality to create folder directory and sub-directory structure  
 
 1. `video_game_init()` - Create folder directory for video game
-2. `battle_game_init()` - Create sub-folders for video game
+2. `battle_story_game_init()` - Create sub-folders for video game
 
 ##### **2. Game Device Selection**
 
