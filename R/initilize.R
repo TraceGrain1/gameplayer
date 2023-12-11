@@ -40,17 +40,17 @@ video_game_init <- function (path) {
 battle_story_game_init <- function (path) {
   setwd(path)
 
-  dir.create("Game_Mode_Battle")
-  dir.create("Game_Mode_Battle/Character_Select")
-  dir.create("Game_Mode_Battle/Character_Versus")
-  dir.create("Game_Mode_Battle/Map_Photos")
-  dir.create("Raw_Sprites/Battle_Mode_Player_Select_Photos")
-  dir.create("Raw_Sprites/Battle_Mode_Map_Select_Photos")
+  ifelse(dir.exists("Game_Mode_Battle"), print("Dir exisits already. Moving on"),dir.create("Game_Mode_Battle"))
+  ifelse(dir.exists("Game_Mode_Battle/Character_Select"), print("Dir exisits already. Moving on"),dir.create("Game_Mode_Battle/Character_Select"))
+  ifelse(dir.exists("Game_Mode_Battle/Character_Versus"), print("Dir exisits already. Moving on"),dir.create("Game_Mode_Battle/Character_Versus"))
+  ifelse(dir.exists("Game_Mode_Battle/Map_Photos"), print("Dir exisits already. Moving on"),dir.create("Game_Mode_Battle/Map_Photos"))
+  ifelse(dir.exists("Raw_Sprites/Photos/Battle_Mode_Player_Select_Photos"), print("Dir exisits already. Moving on"),dir.create("Raw_Sprites/Photos/Battle_Mode_Player_Select_Photos"))
+  ifelse(dir.exists("Raw_Sprites/Photos/Battle_Mode_Map_Select_Photos"), print("Dir exisits already. Moving on"),dir.create("Raw_Sprites/Photos/Battle_Mode_Map_Select_Photos"))
 
 
-
-  dir.create("Game_Mode_Story")
-  dir.create("Game_Mode_Story/Character_Select")
-  dir.create("Raw_Sprites/Story_Mode_Player_Select_Photos")
-
+  ifelse(dir.exists("Game_Mode_Story"), print("Dir exisits already. Moving on"),dir.create("Game_Mode_Story"))
+  ifelse(dir.exists("Game_Mode_Story/Character_Select"), print("Dir exisits already. Moving on"),dir.create("Game_Mode_Story/Character_Select"))
+  ifelse(dir.exists("Raw_Sprites/Photos/Story_Mode_Player_Select_Photos"), print("Dir exisits already. Moving on"),dir.create("Raw_Sprites/Photos/Story_Mode_Player_Select_Photos"))
 }
+
+
