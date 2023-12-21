@@ -4,14 +4,21 @@
 \alias{game_boot}
 \title{Boot up the Game and Bring in the Boot logo}
 \usage{
-game_boot(media_p, scalar_x = 0, scalar_y = 0)
+game_boot(
+  media_p,
+  frames = 100,
+  number,
+  outline_switch = TRUE,
+  output = F,
+  path = NULL
+)
 }
 \arguments{
 \item{media_p}{Path to PNG file}
 
-\item{scalar_x}{numeric value to move title photo along x axis}
+\item{frames}{number of frames to make the boot screen'}
 
-\item{scalar_y}{numeric value to move title photo along y axis}
+\item{path}{}
 }
 \value{
 

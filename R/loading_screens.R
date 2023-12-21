@@ -1,46 +1,94 @@
 #' Boot up the Game and Bring in the Boot logo
 #'
 #' @param media_p Path to PNG file
-#' @param scalar_x numeric value to move title photo along x axis
-#' @param scalar_y numeric value to move title photo along y axis
+#' @param frames number of frames to make the boot screen'
+#' @param number
+#' @param outline_switch
+#' @param output
+#' @param path
+
 #'
 #' @return
 #' @export
 #'
 #' @examples
-game_boot <- function(media_p, scalar_x = 0, scalar_y = 0) {
+game_boot <- function(media_p, frames = 100, number, outline_switch = TRUE, output = F, path = NULL) {
 
-  # Load in image from directory
-  media_p_file <- image_trim(image_read(media_p))
+  frames <- frames:1
 
-  # Rasterize image
-  media_p_file <- as.raster(media_p_file)
+  frames <- c(frames, rep(1, 50))
+
+  for(i in 1:length(frames)){
+    print(paste0("Processed ", i, " images out of ", length(frames) , " | ", round(i/length(frames), digits = 2)))
+    if(i%%6 == 0){
+      gc()
+    }
+    # Load in image from directory
+    media_p_file <- image_trim(image_read(media_p))
+
+    # Rasterize image
+    media_p_file <- as.raster(media_p_file)
 
 
-  ggplot() +
+    my_ggplot <- ggplot() +
 
-    annotation_raster(
-      media_p_file,
-      xmin = -50 + scalar_x,
-      ymin = -50 + scalar_y,
-      xmax = 50 + scalar_x,
-      ymax = 50 + scalar_y
-    )+
+      annotation_raster(
+        media_p_file,
+        xmin = -50,
+        ymin = -50 + frames[i],
+        xmax = 50,
+        ymax = 50 + frames[i]
+      )+
 
-    # Fixed scale for the coordinate system
-    coord_fixed() +
-    theme(
-      legend.position = "none",
-      panel.grid.major = element_blank(),
-      panel.grid.minor = element_blank(),
-      panel.background = element_blank(),
-      axis.title.x = element_blank(),
-      axis.title.y = element_blank(),
-      axis.ticks.x = element_blank(),
-      axis.ticks.y = element_blank(),
-      axis.text.x = element_blank(),
-      axis.text.y = element_blank()
-    )
+      # Create Box around whole image
+
+      geom_line(
+        aes(x = c(-150, 150), y = c(150, 150)),
+        size = 1.5,
+        colour = ifelse(outline_switch == TRUE, "black", "white")
+      )+ # Top
+
+
+      geom_line(
+        aes(x = c(-150, 150), y = c(-150, -150)),
+        size = 1.5,
+        colour = ifelse(outline_switch == TRUE, "black", "white")
+      )+ # Bottom
+
+      geom_line(
+        aes(x = c(150, 150), y = c(150, -150)),
+        size = 1.5,
+        colour = ifelse(outline_switch == TRUE, "black", "white")
+      )+ # Left
+
+
+      geom_line(
+        aes(x = c(-150, -150), y = c(150, -150)),
+        size = 1.5,
+        colour = ifelse(outline_switch == TRUE, "black", "white")
+      )+ # Right
+
+      # Fixed scale for the coordinate system
+      coord_fixed() +
+      theme(
+        legend.position = "none",
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.ticks.y = element_blank(),
+        axis.text.x = element_blank(),
+        axis.text.y = element_blank()
+      )
+
+    if (output == T) {
+      png(paste0(path, "/Game_Screens/Game_Load_up_Screen/", number,"_Game_Load_Up_Screen_", i, ".png"), width = 485, height = 495)
+      print(my_ggplot)
+      dev.off()
+    }
+  }
 }
 
 
@@ -51,12 +99,15 @@ game_boot <- function(media_p, scalar_x = 0, scalar_y = 0) {
 #' @param media_ps list of paths to use for the logos
 #' @param inside_background Background image for the game loading screen
 #' @param nr Empty native raster object
+#' @param output conditional set to FALSE, when set to TRUE you can write the image to disk in the loading screen folder
+#' @param number Loading number slot for loading screen folder
+#' @param path path to game development environment
 #'
 #' @return
 #' @export
 #'
 #' @examples
-game_loading_screen_wide_view <- function (media_v, media_ps, inside_background, nr) {
+game_loading_screen_wide_view <- function (media_v, media_ps, inside_background, nr, output = F, number = NULL, path = NULL) {
 
   loading_video <- image_read_video(media_v, fps = 15, format = "png")
 
@@ -173,6 +224,12 @@ game_loading_screen_wide_view <- function (media_v, media_ps, inside_background,
     # read in the temp file
     my_photo <- append(my_photo, list(readPNG(temp, native = T)))
 
+    if (output == T) {
+      png(paste0(path, "/Game_Screens/Loading_Screen/Loading_Screen_Video_", number, "_Output/","Loading_Screen_", i,".png"), width = 485, height = 495)
+      print(my_ggplot)
+      dev.off()
+    }
+
     # get rid of the temp file
     unlink(temp, recursive = FALSE, force = FALSE)
   }
@@ -192,13 +249,16 @@ game_loading_screen_wide_view <- function (media_v, media_ps, inside_background,
 #' @param media_ps list of paths to use for the logos
 #' @param inside_background Background image for the game loading screen
 #' @param nr Empty native raster object
+#' @param output conditional set to FALSE, when set to TRUE you can write the image to disk in the loading screen folder
+#' @param number Loading number slot for loading screen folder
+#' @param path path to game development environment
 #'
 #'
 #' @return
 #' @export
 #'
 #' @examples
-game_loading_screen_long_view <- function (media_v, media_p, inside_background, nr) {
+game_loading_screen_long_view <- function (media_v, media_p, inside_background, nr, output = F, number = NULL, path = NULL) {
 
   loading_video <- image_read_video(media_v, fps = 15, format = "png")
 
@@ -312,6 +372,12 @@ game_loading_screen_long_view <- function (media_v, media_p, inside_background, 
 
     # read in the temp file
     my_photo <- append(my_photo, list(readPNG(temp, native = T)))
+
+    if (output == T) {
+      png(paste0(path, "/Game_Screens/Loading_Screen/Loading_Screen_Video_", number, "_Output/","Loading_Screen_", i,".png"), width = 485, height = 495)
+      print(my_ggplot)
+      dev.off()
+    }
 
     # get rid of the temp file
     unlink(temp, recursive = FALSE, force = FALSE)

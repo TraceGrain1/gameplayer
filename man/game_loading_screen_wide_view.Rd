@@ -4,7 +4,15 @@
 \alias{game_loading_screen_wide_view}
 \title{Make a loading screen for the game}
 \usage{
-game_loading_screen_wide_view(media_v, media_ps, inside_background, nr)
+game_loading_screen_wide_view(
+  media_v,
+  media_ps,
+  inside_background,
+  nr,
+  output = F,
+  number = NULL,
+  path = NULL
+)
 }
 \arguments{
 \item{media_v}{Path to a video file for the loading screen}
@@ -14,6 +22,12 @@ game_loading_screen_wide_view(media_v, media_ps, inside_background, nr)
 \item{inside_background}{Background image for the game loading screen}
 
 \item{nr}{Empty native raster object}
+
+\item{output}{conditional set to FALSE, when set to TRUE you can write the image to disk in the loading screen folder}
+
+\item{number}{Loading number slot for loading screen folder}
+
+\item{path}{path to game development environment}
 }
 \value{
 

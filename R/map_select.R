@@ -275,3 +275,27 @@ map_selected <- function (map_1, map_2, map_3, map_4, insidebackground, label_to
       axis.text.y = element_blank()
     )
 }
+
+#' Prepares map images for game play
+#'
+#' @param path path to the map photo
+#' @param map_number map image number
+#'
+#' @return
+#' @export
+#'
+#' @examples
+render_map <- function (path, map_number){
+  map_png <- png::readPNG(path)
+  x <- 0:485
+  for(i in 1:39){
+    if(i == 1){
+      temp <- map_png[0:495,0:485,]
+      x <- x+(395/39.5)
+    } else {
+      temp <- map_png[0:495,x,]
+      x <- x+(395/39.5)
+    }
+    png::writePNG(image = temp, target = paste0(map_number,"_Map_image_", i, ".png"))
+  }
+}

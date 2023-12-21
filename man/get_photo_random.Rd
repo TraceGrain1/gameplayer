@@ -4,10 +4,12 @@
 \alias{get_photo_random}
 \title{Get a Random Photo}
 \usage{
-get_photo_random(my_path)
+get_photo_random(my_path, my_pattern = "")
 }
 \arguments{
 \item{my_path}{Directory to where the photos live}
+
+\item{my_pattern}{optional argument to add regular expression search for file}
 }
 \value{
 
