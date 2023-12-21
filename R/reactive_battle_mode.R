@@ -937,7 +937,6 @@ assign_hit_d <- function() {
   return(return_list)
 }
 
-#### Movement Controls ####
 #' Title
 #'
 #' @return

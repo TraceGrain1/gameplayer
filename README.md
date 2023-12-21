@@ -117,9 +117,56 @@ Functionality miscellaneous helper functions for game design
 
 Functionality to place the images generated into the proper locations of the video game development folder structure
 
+1. `output_boot()` - output the boot screen image to the correct folder created by `video_game_init()`
+2. `output_title()` - output the title screen image to the correct folder created by `video_game_init()`
+3. `output_main_menu()` - output the main menu screen image to the correct folder created by `battle_story_game_init()`
+4. `output_battle_character_select()` - output the battle character select screen image to the correct folder created by `battle_story_game_init()`
+5. `output_story_character_select()` - output the story character select screen image to the correct folder created by `battle_story_game_init()`
+6. `output_vs()` - output the main menu screen image to the correct folder created by `battle_story_game_init()`
+7. `output_map_menu()` - output the main menu screen image to the correct folder created by `battle_story_game_init()`
+8. `output_resized_sprites()` output the resized sprites to the resized folder created by `battle_story_game_init()`
+9. `scale_image_height()` - scale images to use in battle mode
+
 ##### **14. Game Play**
 
 Functionality to create live reactive game play
+
+###### **14.1 Game Setup**
+
+1. `create_game_device()`
+2. `turn_game_off()`
+3. `quit_the_game()`
+4. `game_load_up()`
+5. `game_loading_screen()`
+6. `game_start_screen()`
+7. `mode_slots_function_2()`
+8. `create_active_mode_slots()`
+9. `game_mode_start()`
+10. `game_mode_select_B_S()`
+
+###### **14.2 Battle Game Setup**
+
+1. `battle_mode_character_slots_function_16()`
+2. `create_active_battle_mode_character_slots()`
+3. `game_mode_battle_character_select_16()`
+4. `battle_mode_map_slots_function_4()`
+5. `create_active_battle_mode_map_slots()`
+6. `game_mode_battle_map_select_4()`
+7. `assign_user_sprites()`
+8. `assign_npc_sprites()`
+9. `assign_battle_map()`
+10. `battle_mode_set_up_variables()`
+11. `move_function_left()`
+12. `move_function_right()`
+13. `assign_s()`
+14. `assign_shift_s()`
+15. `assign_hit_s()`
+16. `assign_d()`
+17. `assign_shift_d()`
+18. `assign_hit_d()`
+19. `jump_function_left()`
+20. `jump_function_right()`
+21. `jump_function()`
 
 ---
 
